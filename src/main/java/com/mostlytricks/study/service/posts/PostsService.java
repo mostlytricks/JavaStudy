@@ -48,4 +48,13 @@ public class PostsService {
                 .map(PostsListResponseDto::new)// posts-> new PostsListResponseDto(posts), java lambda func.
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void delete (Long id){
+        //존재하는 요소인지 확인 후 삭제 진행 유의할것. 디테일에서 차이가 있다.
+        Posts posts = postsRepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("게시글 없음 -> id = "+id)
+        );
+        postsRepository.delete(posts);
+    }
 }
