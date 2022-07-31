@@ -1,6 +1,7 @@
 package com.mostlytricks.study.domain.posts;
 
 
+import com.mostlytricks.study.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor // 기본 생성자 추가
 @Entity // JPA, className to TABLE_NAME
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,6 +31,10 @@ public class Posts {
         this.author = author;
     }
 
+    public void update( String title, String content){
+        this.content = content;
+        this.title = title;
+    }
     /*
     * No Setter.
     * Entity class내 미사용 권장.
